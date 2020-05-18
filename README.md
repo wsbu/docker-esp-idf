@@ -1,3 +1,5 @@
 # docker-esp-idf
-This image builds off of the espressif/idf:v3.3.1 image and adds the Google Test
-dependency as well for testing.
+This repository represents the needs for development with esp-idf.
+# Versioning
+There will be times when the docker image will need to be updated. In order to preserve the esp-idf version in combination
+with our own changes, the standard docker image tag will be wsbu/esp-idf:v[esp-idf-version]-[wsbu-version].
