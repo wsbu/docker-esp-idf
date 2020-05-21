@@ -1,6 +1,9 @@
-FROM espressif/idf:v3.3.1
+FROM espressif/idf:v3.3.2
 
 RUN apt-get update
+
+# Add CMake
+RUN apt-get -y install cmake
 
 # Add Googletest
 RUN git clone https://github.com/google/googletest.git /googletest \
