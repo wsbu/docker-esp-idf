@@ -35,3 +35,6 @@ RUN npm --version
 
 # Install angular cli
 RUN npm install -g @angular/cli
+
+# Apply patch for nvs_partition_gen.py
+COPY nvs_partition_gen.py /opt/esp/idf/components/nvs_flash/nvs_partition_generator
