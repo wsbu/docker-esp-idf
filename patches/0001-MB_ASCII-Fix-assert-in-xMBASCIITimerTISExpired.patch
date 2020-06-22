@@ -1,0 +1,29 @@
+From be4596836e5b75c9c74e1f5db202535eb33bc6c2 Mon Sep 17 00:00:00 2001
+From: "Kenneth G. Watson" <Ken.Watson@redlion.net>
+Date: Mon, 22 Jun 2020 10:35:02 -0400
+Subject: [PATCH 1/2] MB_ASCII: Fix assert in xMBASCIITimerTISExpired().
+
+Added STATE_RX_IDLE to the list of valid states. Without it, an assertion
+is generated when MB_ASCII timer expires.
+---
+ components/freemodbus/modbus/ascii/mbascii.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/components/freemodbus/modbus/ascii/mbascii.c b/components/freemodbus/modbus/ascii/mbascii.c
+index c513457ea..104c171d5 100644
+--- a/components/freemodbus/modbus/ascii/mbascii.c
++++ b/components/freemodbus/modbus/ascii/mbascii.c
+@@ -421,7 +421,9 @@ xMBASCIITimerT1SExpired( void )
+         break;
+ 
+     default:
+-        assert( ( eRcvState == STATE_RX_RCV ) || ( eRcvState == STATE_RX_WAIT_EOF ) );
++        assert( ( eRcvState == STATE_RX_IDLE ) ||
++                ( eRcvState == STATE_RX_RCV ) ||
++                ( eRcvState == STATE_RX_WAIT_EOF ) );
+         break;
+     }
+     vMBPortTimersDisable(  );
+-- 
+2.25.1
+

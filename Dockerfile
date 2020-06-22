@@ -38,3 +38,13 @@ RUN npm install -g @angular/cli
 
 # Apply patch for nvs_partition_gen.py
 COPY nvs_partition_gen.py /opt/esp/idf/components/nvs_flash/nvs_partition_generator
+
+# Apply Red Lion patches to v3.3.2.
+
+#
+# Copy patches into area where docker image can get to them.
+#
+COPY patches/* /tmp/
+
+RUN cd /opt/esp/idf &&  \
+    git apply --verbose /tmp/*.patch
