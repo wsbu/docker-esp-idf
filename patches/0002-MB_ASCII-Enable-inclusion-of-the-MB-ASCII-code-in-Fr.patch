@@ -1,0 +1,26 @@
+From d41c48da4a0441ec309d1ec31d55d5bbeaca1973 Mon Sep 17 00:00:00 2001
+From: "Kenneth G. Watson" <Ken.Watson@redlion.net>
+Date: Mon, 22 Jun 2020 10:44:01 -0400
+Subject: [PATCH 2/2] MB_ASCII: Enable inclusion of the MB ASCII code in
+ FreeModbus component.
+
+---
+ components/freemodbus/modbus/include/mbconfig.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/components/freemodbus/modbus/include/mbconfig.h b/components/freemodbus/modbus/include/mbconfig.h
+index 54194de26..d5f5eef92 100644
+--- a/components/freemodbus/modbus/include/mbconfig.h
++++ b/components/freemodbus/modbus/include/mbconfig.h
+@@ -47,7 +47,7 @@ PR_BEGIN_EXTERN_C
+  *  @{
+  */
+ /*! \brief If Modbus ASCII support is enabled. */
+-#define MB_ASCII_ENABLED                        (  0 )
++#define MB_ASCII_ENABLED                        (  1 )
+ 
+ /*! \brief If Modbus RTU support is enabled. */
+ #define MB_RTU_ENABLED                          (  1 )
+-- 
+2.25.1
+
