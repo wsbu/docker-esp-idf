@@ -46,7 +46,7 @@ RUN python -m pip install --upgrade pip virtualenv
 #ARG IDF_CLONE_BRANCH_OR_TAG=release/v3.3
 
 ARG IDF_CLONE_URL=git@bitbucket.org:redlionstl/esp-idf.git
-ARG IDF_CLONE_BRANCH_OR_TAG=rl-release/v3.3
+ARG IDF_CLONE_BRANCH_OR_TAG=v3.3.2001#1
 ARG IDF_CHECKOUT_REF=
 
 ENV IDF_PATH=/temp/esp/idf
@@ -172,6 +172,11 @@ RUN npm install -g @angular/cli
 
 # Apply patch for nvs_partition_gen.py
 COPY nvs_partition_gen.py /opt/esp/idf/components/nvs_flash/nvs_partition_generator
+
+# Install the sonar-scanner package from SonarSource
+RUN wget -O /opt/sonar-scanner-cli-4.3.0.2102-linux.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.3.0.2102-linux.zip
+RUN unzip -d /opt/. /opt/sonar-scanner-cli-4.3.0.2102-linux.zip
+RUN rm /opt/sonar-scanner-cli-4.3.0.2102-linux.zip
 
 ####################
 ## END RL changes.
