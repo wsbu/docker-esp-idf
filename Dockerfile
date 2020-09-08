@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
     libusb-1.0-0-dev \
     make \
     ninja-build \
-    python3 \
+    python3.8 \
     python3-pip \
     unzip \
     wget \
@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
     zip \
    && apt-get autoremove -y \
    && rm -rf /var/lib/apt/lists/* \
-   && update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+   && update-alternatives --install /usr/bin/python python /usr/bin/python3.8 10
 
 RUN python -m pip install --upgrade pip virtualenv
 
@@ -108,7 +108,7 @@ RUN apt-get update && apt-get install -y \
     libusb-1.0-0-dev \
     make \
     ninja-build \
-    python3 \
+    python3.8 \
     python3-pip \
     unzip \
     wget \
@@ -116,9 +116,9 @@ RUN apt-get update && apt-get install -y \
     zip \
    && apt-get autoremove -y \
    && rm -rf /var/lib/apt/lists/* \
-   && update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+   && update-alternatives --install /usr/bin/python python /usr/bin/python3.8 10
 
-RUN python -m pip install --upgrade pip virtualenv
+RUN python3.8 -m pip install --upgrade pip virtualenv
 
 ENV TEMP_IDF_PATH=/temp/esp/idf
 ENV IDF_PATH=/opt/esp/idf
