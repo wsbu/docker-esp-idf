@@ -42,11 +42,8 @@ RUN python -m pip install --upgrade pip virtualenv
 #   IDF_CLONE_BRANCH_OR_TAG=release/vX.Y
 #   IDF_CHECKOUT_REF=<some commit on release/vX.Y branch>.
 
-#ARG IDF_CLONE_URL=https://github.com/espressif/esp-idf.git
-#ARG IDF_CLONE_BRANCH_OR_TAG=release/v3.3
-
 ARG IDF_CLONE_URL=git@bitbucket.org:redlionstl/esp-idf.git
-ARG IDF_CLONE_BRANCH_OR_TAG=v3.3.2001#1
+ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-1
 ARG IDF_CHECKOUT_REF=
 
 ENV IDF_PATH=/temp/esp/idf
@@ -127,7 +124,6 @@ ENV IDF_TOOLS_PATH=/opt/esp
 # Copy the repository from the previous image
 #
 COPY --from=intermediate $TEMP_IDF_PATH $IDF_PATH
-
 
 RUN $IDF_PATH/install.sh && \
   rm -rf $IDF_TOOLS_PATH/dist
