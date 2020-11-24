@@ -43,7 +43,7 @@ RUN python -m pip install --upgrade pip virtualenv
 #   IDF_CHECKOUT_REF=<some commit on release/vX.Y branch>.
 
 ARG IDF_CLONE_URL=git@bitbucket.org:redlionstl/esp-idf.git
-ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-2
+ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-3
 ARG IDF_CHECKOUT_REF=
 
 ENV IDF_PATH=/temp/esp/idf
@@ -145,9 +145,10 @@ RUN git clone https://github.com/google/googletest.git /googletest \
 # Add mkspiffs utility
 RUN git clone https://github.com/igrr/mkspiffs.git \
     && cd mkspiffs \
+    && VERS=`git describe` \
 	&& git submodule update --init \
 	&& make dist BUILD_CONFIG_NAME="-esp-idf" CPPFLAGS="-DSPIFFS_OBJ_META_LEN=4 -DSPIFFS_OBJ_NAME_LEN=64" \
-	&& cp mkspiffs-0.2.3-6-g983970e-esp-idf-linux64/mkspiffs /usr/bin \
+	&& cp mkspiffs-${VERS}-esp-idf-linux64/mkspiffs /usr/bin \
 	&& cd / && rm -rf mkspiffs
 
 # Install specific Node version
