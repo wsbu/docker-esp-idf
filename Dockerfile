@@ -43,7 +43,7 @@ RUN python -m pip install --upgrade pip virtualenv
 #   IDF_CHECKOUT_REF=<some commit on release/vX.Y branch>.
 
 ARG IDF_CLONE_URL=git@bitbucket.org:redlionstl/esp-idf.git
-ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-7
+ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-8
 ARG IDF_CHECKOUT_REF=
 
 ENV IDF_PATH=/temp/esp/idf
@@ -150,6 +150,15 @@ RUN git clone https://github.com/igrr/mkspiffs.git \
 	&& make dist BUILD_CONFIG_NAME="-esp-idf" CPPFLAGS="-DSPIFFS_OBJ_META_LEN=4 -DSPIFFS_OBJ_NAME_LEN=64" \
 	&& cp mkspiffs-${VERS}-esp-idf-linux64/mkspiffs /usr/bin \
 	&& cd / && rm -rf mkspiffs
+
+# Add mkfatfs utility to build FAT image file  (read-only in GPM)
+RUN git clone https://github.com/labplus-cn/mkfatfs.git \
+    && cd mkfatfs \
+    && VERS=`git describe` \
+	&& git submodule update --init \
+	&& cmake . \
+	&& make \
+	&& cp mkfatfs /usr/bin
 
 # Install specific Node version
 ENV NODE_VERSION=12.16.1
