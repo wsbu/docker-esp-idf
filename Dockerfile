@@ -43,7 +43,7 @@ RUN python -m pip install --upgrade pip virtualenv
 #   IDF_CHECKOUT_REF=<some commit on release/vX.Y branch>.
 
 ARG IDF_CLONE_URL=git@bitbucket.org:redlionstl/esp-idf.git
-ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-8
+ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-9
 ARG IDF_CHECKOUT_REF=
 
 ENV IDF_PATH=/temp/esp/idf
