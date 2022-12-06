@@ -17,5 +17,7 @@ jobs:
     - uses: actions/checkout@v3
       env:
         SECRET: ${{ secrets.ESP_IDF_SECRET }}
-    - name: Build the Docker image "$SECRET"     
+    - name: Build the Docker image "$SECRET"  
+      env:
+        SECRET: ${{ secrets.ESP_IDF_SECRET }}
       run: docker build . --no-cache --file Dockerfile --tag wsbu/esp-idf:$(date +%s) --build-arg SSH_KEY="$SECRET"
