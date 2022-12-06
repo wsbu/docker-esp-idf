@@ -43,7 +43,7 @@ RUN python -m pip install --upgrade pip virtualenv
 #   IDF_CHECKOUT_REF=<some commit on release/vX.Y branch>.
 
 ARG IDF_CLONE_URL=git@bitbucket.org:redlionstl/esp-idf.git
-ARG IDF_CLONE_BRANCH_OR_TAG=v4.3.dev-12
+ARG IDF_CLONE_BRANCH_OR_TAG=v4.4.2000
 ARG IDF_CHECKOUT_REF=
 
 ENV IDF_PATH=/temp/esp/idf
@@ -71,16 +71,6 @@ RUN mkdir -p /root/.ssh/ && \
       git checkout $IDF_CHECKOUT_REF && \
       git submodule update --init --recursive; \
     fi
-
-# RUN echo IDF_CHECKOUT_REF=$IDF_CHECKOUT_REF IDF_CLONE_BRANCH_OR_TAG=$IDF_CLONE_BRANCH_OR_TAG && \
-#     git clone --recursive \
-#       ${IDF_CLONE_BRANCH_OR_TAG:+-b $IDF_CLONE_BRANCH_OR_TAG} \
-#       $IDF_CLONE_URL $IDF_PATH && \
-#     if [ -n "$IDF_CHECKOUT_REF" ]; then \
-#       cd $IDF_PATH && \
-#       git checkout $IDF_CHECKOUT_REF && \
-#       git submodule update --init --recursive; \
-#     fi
 
 #
 # Time to build the final image.
@@ -134,6 +124,7 @@ RUN mkdir -p $HOME/.ccache && \
 ####################
 ## Apply RL changes.
 ####################
+RUN git config --global --add safe.directory /project/gpm-mobile
 
 # Add Googletest
 RUN git clone https://github.com/google/googletest.git /googletest \
@@ -161,7 +152,8 @@ RUN git clone https://github.com/labplus-cn/mkfatfs.git \
 	&& cp mkfatfs /usr/bin
 
 # Install specific Node version
-ENV NODE_VERSION=12.16.1
+#ENV NODE_VERSION=12.16.1
+ENV NODE_VERSION=12.20.2
 ENV NVM_DIR=/root/.nvm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
