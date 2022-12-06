@@ -15,8 +15,6 @@ jobs:
       
     steps:
     - uses: actions/checkout@v3
-      env:
-        SECRET: ${{ secrets.ESP_IDF_SECRET }}
     - name: Build the Docker image "$SECRET"  
       env:
         SECRET: ${{ secrets.ESP_IDF_SECRET }}
