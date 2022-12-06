@@ -15,5 +15,7 @@ jobs:
       
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image      
-      run: docker build . --no-cache --file Dockerfile --tag wsbu/esp-idf:$(date +%s) --build-arg SSH_KEY=${{ secrets.ESP_IDF_SECRET }}
+      env:
+        SECRET: ${{ secrets.SuperSecret }}
+    - name: Build the Docker image "$SECRET"     
+      run: docker build . --no-cache --file Dockerfile --tag wsbu/esp-idf:$(date +%s) --build-arg SSH_KEY="$SECRET"
